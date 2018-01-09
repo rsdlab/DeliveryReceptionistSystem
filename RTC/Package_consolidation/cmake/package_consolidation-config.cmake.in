@@ -1,0 +1,54 @@
+# Package_consolidation CMake config file
+#
+# This file sets the following variables:
+# Package_consolidation_FOUND - Always TRUE.
+# Package_consolidation_INCLUDE_DIRS - Directories containing the Package_consolidation include files.
+# Package_consolidation_IDL_DIRS - Directories containing the Package_consolidation IDL files.
+# Package_consolidation_LIBRARIES - Libraries needed to use Package_consolidation.
+# Package_consolidation_DEFINITIONS - Compiler flags for Package_consolidation.
+# Package_consolidation_VERSION - The version of Package_consolidation found.
+# Package_consolidation_VERSION_MAJOR - The major version of Package_consolidation found.
+# Package_consolidation_VERSION_MINOR - The minor version of Package_consolidation found.
+# Package_consolidation_VERSION_REVISION - The revision version of Package_consolidation found.
+# Package_consolidation_VERSION_CANDIDATE - The candidate version of Package_consolidation found.
+
+message(STATUS "Found Package_consolidation-@PROJECT_VERSION@")
+set(Package_consolidation_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(Package_consolidation_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(Package_consolidation_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(Package_consolidation_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(Package_consolidation_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(Package_consolidation_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(Package_consolidation_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(Package_consolidation_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(Package_consolidation_VERSION @PROJECT_VERSION@)
+set(Package_consolidation_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(Package_consolidation_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(Package_consolidation_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(Package_consolidation_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+
