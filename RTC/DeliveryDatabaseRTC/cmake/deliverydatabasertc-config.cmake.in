@@ -1,0 +1,54 @@
+# DeliveryDatabaseRTC CMake config file
+#
+# This file sets the following variables:
+# DeliveryDatabaseRTC_FOUND - Always TRUE.
+# DeliveryDatabaseRTC_INCLUDE_DIRS - Directories containing the DeliveryDatabaseRTC include files.
+# DeliveryDatabaseRTC_IDL_DIRS - Directories containing the DeliveryDatabaseRTC IDL files.
+# DeliveryDatabaseRTC_LIBRARIES - Libraries needed to use DeliveryDatabaseRTC.
+# DeliveryDatabaseRTC_DEFINITIONS - Compiler flags for DeliveryDatabaseRTC.
+# DeliveryDatabaseRTC_VERSION - The version of DeliveryDatabaseRTC found.
+# DeliveryDatabaseRTC_VERSION_MAJOR - The major version of DeliveryDatabaseRTC found.
+# DeliveryDatabaseRTC_VERSION_MINOR - The minor version of DeliveryDatabaseRTC found.
+# DeliveryDatabaseRTC_VERSION_REVISION - The revision version of DeliveryDatabaseRTC found.
+# DeliveryDatabaseRTC_VERSION_CANDIDATE - The candidate version of DeliveryDatabaseRTC found.
+
+message(STATUS "Found DeliveryDatabaseRTC-@PROJECT_VERSION@")
+set(DeliveryDatabaseRTC_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(DeliveryDatabaseRTC_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(DeliveryDatabaseRTC_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(DeliveryDatabaseRTC_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(DeliveryDatabaseRTC_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(DeliveryDatabaseRTC_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(DeliveryDatabaseRTC_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(DeliveryDatabaseRTC_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(DeliveryDatabaseRTC_VERSION @PROJECT_VERSION@)
+set(DeliveryDatabaseRTC_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(DeliveryDatabaseRTC_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(DeliveryDatabaseRTC_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(DeliveryDatabaseRTC_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+

@@ -1,0 +1,46 @@
+#ifndef DERIVERYMANAGEINTERFACE_IDL
+#define DERIVERYMANAGEINTERFACE_IDL
+#include "BasicDataType.idl"
+module DeriveryDatabase{
+   
+	typedef sequence<double> DoubleSeq;
+
+  struct RETURN_ID {
+    long id;
+    string comment;
+  };
+
+  struct Size{
+	  double length;
+	  double width;
+	  double high;
+  };
+
+  struct DeliveryData{
+	  Size objectSize;
+      double weight;
+	  string sendPCode;
+	  string sendAddress;
+	  string PCode;
+	  string address;
+	  DoubleSeq option;
+  };
+
+  struct FeeAndDay{
+	  double Fee;
+	  double Day;
+  };
+
+  const long OK = 0;
+  const long NG = -1;
+  const long STATUS_ERR = -2;
+  const long VALUE_ERR = -3;
+  const long NOT_SV_ON_ERR = -4;
+  const long FULL_MOTION_QUEUE_ERR = -5;
+  const long NOT_IMPLEMENTED = -6;
+  
+  interface DeriveryDatabaseInterface{
+	  RETURN_ID getDeriveryDayAndFee(in DeliveryData Alldata, out FeeAndDay FDdata);
+  };
+};
+#endif //DERIVERYMANAGEINTERFACE_IDL
