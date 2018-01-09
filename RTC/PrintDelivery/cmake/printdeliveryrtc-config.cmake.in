@@ -1,0 +1,54 @@
+# PrintDeliveryRTC CMake config file
+#
+# This file sets the following variables:
+# PrintDeliveryRTC_FOUND - Always TRUE.
+# PrintDeliveryRTC_INCLUDE_DIRS - Directories containing the PrintDeliveryRTC include files.
+# PrintDeliveryRTC_IDL_DIRS - Directories containing the PrintDeliveryRTC IDL files.
+# PrintDeliveryRTC_LIBRARIES - Libraries needed to use PrintDeliveryRTC.
+# PrintDeliveryRTC_DEFINITIONS - Compiler flags for PrintDeliveryRTC.
+# PrintDeliveryRTC_VERSION - The version of PrintDeliveryRTC found.
+# PrintDeliveryRTC_VERSION_MAJOR - The major version of PrintDeliveryRTC found.
+# PrintDeliveryRTC_VERSION_MINOR - The minor version of PrintDeliveryRTC found.
+# PrintDeliveryRTC_VERSION_REVISION - The revision version of PrintDeliveryRTC found.
+# PrintDeliveryRTC_VERSION_CANDIDATE - The candidate version of PrintDeliveryRTC found.
+
+message(STATUS "Found PrintDeliveryRTC-@PROJECT_VERSION@")
+set(PrintDeliveryRTC_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(PrintDeliveryRTC_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(PrintDeliveryRTC_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(PrintDeliveryRTC_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(PrintDeliveryRTC_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(PrintDeliveryRTC_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(PrintDeliveryRTC_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(PrintDeliveryRTC_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(PrintDeliveryRTC_VERSION @PROJECT_VERSION@)
+set(PrintDeliveryRTC_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(PrintDeliveryRTC_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(PrintDeliveryRTC_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(PrintDeliveryRTC_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+
